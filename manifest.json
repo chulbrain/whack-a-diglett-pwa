@@ -1,0 +1,29 @@
+{
+  "short_name": "두더지 잡기",
+  "name": "두더지 잡기 PWA 게임",
+  "description": "React와 Framer Motion으로 만든 재미있는 두더지 잡기 게임!",
+  "icons": [
+    {
+      "src": "icons/favicon.ico", // 아이콘 경로는 실제 파일 위치에 맞게 수정해주세요. (예: public/icons/favicon.ico)
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icons/logo192.png", // 192x192 픽셀 아이콘 (예: public/icons/logo192.png)
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable" // 아이콘이 다양한 모양으로 잘릴 수 있도록 함
+    },
+    {
+      "src": "icons/logo512.png", // 512x512 픽셀 아이콘 (예: public/icons/logo512.png)
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".", // 앱 시작 시 로드될 URL (현재 디렉토리 기준)
+  "display": "standalone", // 앱이 독립적인 창으로 표시됨 (브라우저 UI 없음)
+  "orientation": "portrait", // 선호하는 화면 방향 (세로)
+  "theme_color": "#FDE68A", // 앱의 테마 색상 (주소창, 작업 전환기 등) - 예시로 amber-100 색상
+  "background_color": "#FFFBEB" // 앱 로딩 중 표시될 배경색 - 예시로 rose-100 색상
+}
