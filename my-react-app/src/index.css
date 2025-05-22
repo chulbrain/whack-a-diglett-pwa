@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hole-container:hover { 
+  filter: brightness(1.1); 
+}
+
+.difficulty-button { 
+  padding: 0.5rem 0.75rem; /* 모바일에서 버튼 패딩 약간 조정 */
+  font-size: 0.875rem; /* 모바일에서 버튼 폰트 약간 작게 */
+  border-radius: 0.5rem; 
+  font-weight: bold; 
+  transition: all 0.2s; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 640px) { /* sm breakpoint 이상 */
+  .difficulty-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+.difficulty-button-selected { 
+  transform: scale(1.05); 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}
+
+/* 
+  The hammer-cursor-active class is no longer needed here, 
+  as the cursor style will be applied directly to the main div in App.tsx.
+*/
