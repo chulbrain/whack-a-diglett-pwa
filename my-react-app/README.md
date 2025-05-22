@@ -52,3 +52,11 @@ export default tseslint.config({
   },
 })
 ```
+
+## Play the Game Online! 🎮
+
+This game is automatically built and deployed using GitHub Actions. You can play the latest version online at:
+
+[https://chulbrain.github.io/whack-a-diglett-pwa/](https://chulbrain.github.io/whack-a-diglett-pwa/)
+
+*(Note: It might take a few minutes for changes to be live after they are pushed to the `main` branch.)*
