@@ -114,35 +114,47 @@ export default function App() {
     }, 1000);
   };
 
+  const isMoleHit = (clickedIndex: number) => {
+    if (activeIndex !== null && clickedIndex === activeIndex) {
+      const hitIndex = activeIndex;
+      setActiveIndex(null);
+      setPreviousActiveIndexInfo(null);
+      return { hit: true, index: hitIndex };
+    }
+
+    if (
+      previousActiveIndexInfo &&
+      clickedIndex === previousActiveIndexInfo.index &&
+      Date.now() - previousActiveIndexInfo.deactivationTime < EXIT_GRACE_PERIOD
+    ) {
+      const hitIndex = previousActiveIndexInfo.index;
+      setPreviousActiveIndexInfo(null);
+      return { hit: true, index: hitIndex };
+    }
+
+    return { hit: false, index: -1 };
+  };
+
+  const triggerHitEffects = (hitMoleIndex: number) => {
+    setScore((s) => s + 1);
+    setHitIndex(hitMoleIndex);
+    setHammerState({ holeIndex: hitMoleIndex, key: Date.now() });
+
+    hitSound.current!.triggerAttackRelease("C3", "8n", Tone.now());
+    setTimeout(() => setHitIndex(null), 300);
+    setTimeout(() => {
+      setHammerState((prevState) =>
+        prevState.holeIndex === hitMoleIndex ? { holeIndex: null, key: 0 } : prevState
+      );
+    }, 600);
+  };
+
   const bonk = (clickedIndex: number) => {
     if (!running || !hitSound.current) return;
 
-    let isHit = false;
-    let hitMoleIndex = -1;
-
-    if (activeIndex !== null && clickedIndex === activeIndex) {
-      isHit = true;
-      hitMoleIndex = activeIndex;
-      setActiveIndex(null);
-      setPreviousActiveIndexInfo(null);
-    } 
-    else if (previousActiveIndexInfo && clickedIndex === previousActiveIndexInfo.index && 
-             (Date.now() - previousActiveIndexInfo.deactivationTime < EXIT_GRACE_PERIOD)) {
-      isHit = true;
-      hitMoleIndex = previousActiveIndexInfo.index;
-      setPreviousActiveIndexInfo(null);
-    }
-
-    if (isHit) {
-      setScore((s) => s + 1);
-      setHitIndex(hitMoleIndex);
-      setHammerState({ holeIndex: hitMoleIndex, key: Date.now() });
-      
-      hitSound.current.triggerAttackRelease("C3", "8n", Tone.now());
-      setTimeout(() => setHitIndex(null), 300);
-      setTimeout(() => {
-         setHammerState(prevState => prevState.holeIndex === hitMoleIndex ? { holeIndex: null, key: 0 } : prevState);
-      }, 600);
+    const { hit, index } = isMoleHit(clickedIndex);
+    if (hit) {
+      triggerHitEffects(index);
     }
   };
 
